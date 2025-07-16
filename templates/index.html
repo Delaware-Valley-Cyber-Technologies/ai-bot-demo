@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Bot Sandbox</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+  <div class="chat-container">
+    <div id="chat-window" class="chat-window">
+      {% for message in chat_history %}
+        <div class="{{ message['role'] }}">{{ message['text'] }}</div>
+      {% endfor %}
+      {% if images %}
+        <div class="bot">
+          <div class="image-gallery">
+            {% for image in images %}
+              <img src="{{ url_for('static', filename=image) }}" alt="Bot image">
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    <form action="/" method="POST" class="input-form">
+      <input type="text" name="user_input" placeholder="Ask the bot something..." autocomplete="off" required />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</body>
+</html>
+
